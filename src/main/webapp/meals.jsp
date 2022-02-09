@@ -21,11 +21,7 @@
         <th>Calories</th>
     </tr>
     <c:forEach var="meal" items="${mealsList}">
-        <c:set var="rowColor" value="Green"/>
-        <c:if test="${meal.isExcess() eq true}">
-            <c:set var="rowColor" value="Red"/>
-        </c:if>
-        <tr style="color:${rowColor}">
+        <tr style="color:${meal.excess ? "red" : "green"}">
             <td>${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}</td>
             <td>${meal.description}</td>
             <td>${meal.calories}</td>
