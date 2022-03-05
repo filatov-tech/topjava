@@ -1,4 +1,7 @@
-package ru.javawebinar.topjava.model;
+package ru.javawebinar.topjava.to;
+
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
 
