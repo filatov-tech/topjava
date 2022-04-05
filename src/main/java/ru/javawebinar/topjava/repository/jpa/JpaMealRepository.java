@@ -26,6 +26,7 @@ public class JpaMealRepository implements MealRepository {
         if (meal.isNew()) {
             meal.setUser(user);
             em.persist(meal);
+            return meal;
         } else {
             updateIsDone = em.createNamedQuery(Meal.UPDATE)
                     .setParameter("dateTime", meal.getDateTime())
@@ -49,10 +50,8 @@ public class JpaMealRepository implements MealRepository {
 
     @Override
     public Meal get(int id, int userId) {
-        return em.createNamedQuery(Meal.GET, Meal.class)
-                .setParameter("id", id)
-                .setParameter("userId", userId)
-                .getSingleResult();
+        Meal meal = em.find(Meal.class, id);
+        return meal != null && meal.getUser().getId() == userId ? meal : null;
     }
 
     @Override
