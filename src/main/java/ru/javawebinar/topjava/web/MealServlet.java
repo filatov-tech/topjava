@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.util.StringUtils;
 import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.Meal;
@@ -28,9 +29,9 @@ public class MealServlet extends HttpServlet {
 
     @Override
     public void init() {
-        System.setProperty("spring.profiles.active", Profiles.ACTIVE_DB);
-        System.setProperty("spring.profiles.active", Profiles.REPOSITORY_IMPLEMENTATION);
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
+        springContext = new ClassPathXmlApplicationContext(new String[]{"spring/spring-app.xml", "spring/spring-db.xml"}, false);
+        springContext.getEnvironment().setActiveProfiles(Profiles.ACTIVE_DB, Profiles.REPOSITORY_IMPLEMENTATION);
+        springContext.refresh();
         mealController = springContext.getBean(MealRestController.class);
     }
 

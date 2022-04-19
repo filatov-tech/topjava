@@ -17,11 +17,11 @@ public class Profiles {
     public static final String ACTIVE_DB = POSTGRES_DB;
 
     //  Get DB profile depending of DB driver in classpath
-    public static String[] getActiveProfiles() {
+    public static String getActiveProfiles() {
         if (ClassUtils.isPresent("org.postgresql.Driver", null)) {
-            return new String[]{POSTGRES_DB, REPOSITORY_IMPLEMENTATION};
+            return POSTGRES_DB;
         } else if (ClassUtils.isPresent("org.hsqldb.jdbcDriver", null)) {
-            return new String[]{HSQL_DB, REPOSITORY_IMPLEMENTATION};
+            return HSQL_DB;
         } else {
             throw new IllegalStateException("Could not find DB driver");
         }
