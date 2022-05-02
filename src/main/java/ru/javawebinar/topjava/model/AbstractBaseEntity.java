@@ -57,7 +57,7 @@ public abstract class AbstractBaseEntity implements Persistable<Integer> {
         if (this == o) {
             return true;
         }
-        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         AbstractBaseEntity that = (AbstractBaseEntity) o;
